@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Renata Visio</title>
+</head>
+<body>
+  <h1>Renata Visio</h1>
+  <div id="visio">
+    <button id="capture">Capture</button>
+
+    <script type="text/javascript" src="{{ url_for('static', filename='capture.js') }}"></script>      
+  </div>
+  <div id="image_show">
+  <img id="video" src="{{ url_for('video_viewer') }}">
+ </div>
+
+</body>
+</html>
