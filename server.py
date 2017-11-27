@@ -17,13 +17,33 @@ def capture_status():
         video_camera = VideoCamera()
 
     json = request.get_json()
+    print(json)
 
     status = json['status']
+    #train=json['train']
+    #print(train)
 
-    if status == "true":
-        video_camera.capture()
+    if status =="true":
+        video_camera.capture("image/train.jpg")
         return jsonify(result="captured")
-   
+
+#Testing
+@app.route('/train_status', methods=['POST'])
+def train_status():
+    global video_camera 
+    if video_camera == None:
+        video_camera = VideoCamera()
+
+    json = request.get_json()
+    print(json)
+
+    status = json['train']
+    #train=json['train']
+    print(status)
+
+    if status =="true":
+        video_camera.capture("for_match.jpg")
+        return jsonify(result="matching") 
 
 def video_stream():
     global video_camera 
@@ -44,9 +64,9 @@ def video_stream():
                             b'Content-Type: image/jpeg\r\n\r\n' + global_frame + b'\r\n\r\n')
 
 
-@app.route('/image_viewer')
-def get_gallery():
-    return "<img src='image/train.jpg'/>"
+#@app.route('/image_viewer')
+#def get_gallery():
+#    return "<img src='image/train.jpg'/>"
                          
 
 @app.route('/video_viewer')

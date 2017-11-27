@@ -3,7 +3,7 @@ import threading
 import time
 
 class CapturingThread (threading.Thread):
-    def __init__(self, name, camera):
+    def __init__(self, name, camera,na):
         threading.Thread.__init__(self)
         self.name = name
         self.isRunning = True
@@ -12,7 +12,7 @@ class CapturingThread (threading.Thread):
         success, image = self.cap.read()
         time.sleep(0.1)  # If you don't wait, the image will be dark
         
-        cv2.imwrite("image/train.jpg", image)
+        cv2.imwrite(na, image)
 
     def stop(self):
         self.isRunning = False
@@ -49,9 +49,9 @@ class VideoCamera(object):
         else:
             return None
 
-    def capture(self):
+    def capture(self,na):
         self.is_caputred = True
-        self.capturingThread = CapturingThread("Image Capturing Thread", self.cap)
+        self.capturingThread = CapturingThread("Image Capturing Thread", self.cap,na)
         self.capturingThread.start()
         self.capturingThread.stop()
         
